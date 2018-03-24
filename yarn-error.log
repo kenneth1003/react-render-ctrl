@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn install
+  /usr/local/bin/node /usr/local/bin/yarn add rimraf --dev
 
 PATH: 
   /Users/kenneth/.pyenv/bin:/Users/kenneth/anaconda/bin:/Users/kenneth/google-cloud-sdk/bin:/Users/kenneth/mongodb/bin:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools:/Users/kenneth/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/kenneth/.pyenv/bin:/Users/kenneth/anaconda/bin:/Users/kenneth/google-cloud-sdk/bin:/Users/kenneth/mongodb/bin:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools:/Users/kenneth/bin
@@ -20,7 +20,9 @@ npm manifest:
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "test": "jest"
+      "test": "jest",
+      "test:dev": "jest --watch",
+      "build:npm": "rimraf dist && babel src --out-dir dist --ignore *.stories.js *.spec.js",
     },
     "jest": {
       "setupFiles": [
@@ -43,6 +45,10 @@ npm manifest:
       "enzyme": "^3.3.0",
       "enzyme-to-json": "^3.3.3",
       "jest": "^22.4.2",
+      "enzyme-adapter-react-16": "^1.1.1",
+      "react": "^16.2.0",
+      "react-dom": "^16.2.0",
+      "react-test-renderer": "^16.2.0"
     }
   }
 
@@ -4295,7 +4301,7 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  SyntaxError: /Users/kenneth/Desktop/project/side-project/react-render-ctrl/package.json: Unexpected token } in JSON at position 650
+  SyntaxError: /Users/kenneth/Desktop/project/side-project/react-render-ctrl/package.json: Unexpected token } in JSON at position 258
       at JSON.parse (<anonymous>)
       at /usr/local/lib/node_modules/yarn/lib/util/fs.js:554:57
       at Generator.next (<anonymous>)

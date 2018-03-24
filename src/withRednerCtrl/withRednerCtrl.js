@@ -7,7 +7,7 @@ import {
 } from '../constant';
 
 
-const _LoadingComponent = () => <div id={ localDefaultLoadingId }>Loading</div>;
+const _LoadingComponent = () => <div id={ localDefaultLoadingId }></div>;
 const _EmptyComponent = () => <div id={ localDefaultEmptyId } />;
 const _ErrorComponent = () => <div id={ localDefaultErrorId }>Error</div>;
 

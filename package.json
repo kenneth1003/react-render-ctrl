@@ -1,11 +1,13 @@
 {
   "name": "react-render-ctrl",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "test:dev": "jest --watch"
+    "test:dev": "jest --watch",
+    "build:npm": "rimraf dist && babel src --out-dir dist --ignore *.stories.js,*.spec.js",
+    "copy-files": "node scripts/copyfiles.js"
   },
   "jest": {
     "setupFiles": [
@@ -26,9 +28,10 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "enzyme": "^3.3.0",
-    "enzyme-to-json": "^3.3.3",
-    "jest": "^22.4.2",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.4.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0"
