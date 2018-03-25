@@ -1,5 +1,5 @@
 import React from 'react';
-import withRenderCtrl from "./withRednerCtrl";
+import withRenderCtrl from "./withRenderCtrl";
 import RenderCtrlProvider from "./RenderCtrlProvider";
 import {
   localDefaultLoadingId,
@@ -8,7 +8,7 @@ import {
 } from './constant';
 
 const IdealStatusComponent = () => <div id="ideal"></div>;
-const TestingComponent = withRenderCtrl(IdealStatusComponent);
+const ComponentDefault = withRenderCtrl(IdealStatusComponent);
 
 const LoadingComponent = () => <div id="default-loading">LoadingComponent</div>;
 const EmptyComponent = () => <div id="default-empty">EmptyComponent</div>;
@@ -29,21 +29,22 @@ const customComponents = {
   EmptyComponent: CustomEmptyComponent,
   ErrorComponent: CustomErrorComponent
 };
+const ComponentCustom = withRenderCtrl(IdealStatusComponent, customComponents);
 
 test('Local Default Components Should be accessed, when no provider', () => {
   const localDefaultEmptyComponentCount = mount(
-    <TestingComponent debug/>
+    <ComponentDefault debug/>
   ).find('#' + localDefaultEmptyId).length;
   expect(localDefaultEmptyComponentCount).toEqual(1);
   const localDefaultLoadingComponentCount = mount(
-    <TestingComponent
-      isFetching
+    <ComponentDefault
+      isLoading
     />
   ).find('#' + localDefaultLoadingId).length;
   expect(localDefaultLoadingComponentCount).toEqual(1);
   const localDefaultErrorComponentCount = mount(
-    <TestingComponent
-      isFetching
+    <ComponentDefault
+      isLoading
       isError
     />
   ).find('#' + localDefaultErrorId).length;
@@ -55,15 +56,15 @@ test('Default Components Should be accessed with <RenderCtrlProvider />', () => 
     <RenderCtrlProvider
       { ...defaultComponents }
     >
-      <TestingComponent />
+      <ComponentDefault />
     </RenderCtrlProvider>
   ).find('#default-empty').length;
 
   expect(defaultEmptyComponentCount).toEqual(1);
   const defaultLoadingComponentCount = mount(
     <RenderCtrlProvider { ...defaultComponents }>
-      <TestingComponent
-        isFetching
+      <ComponentDefault
+        isLoading
       />
     </RenderCtrlProvider>
   ).find('#default-loading').length;
@@ -71,8 +72,8 @@ test('Default Components Should be accessed with <RenderCtrlProvider />', () => 
 
   const defaultErrorComponentCount = mount(
     <RenderCtrlProvider { ...defaultComponents } >
-      <TestingComponent
-        isFetching
+      <ComponentDefault
+        isLoading
         isError
       />
     </RenderCtrlProvider>
@@ -83,18 +84,15 @@ test('Default Components Should be accessed with <RenderCtrlProvider />', () => 
 test('Custom Components should overwrite Default Components with <RenderCtrlProvider />', () => {
   const customEmptyComponentCount = mount(
     <RenderCtrlProvider { ...defaultComponents }>
-      <TestingComponent
-        { ...customComponents }
-      />
+      <ComponentCustom />
     </RenderCtrlProvider>
   ).find('#custom-empty').length;
   expect(customEmptyComponentCount).toEqual(1);
 
   const customLoadingComponentCount = mount(
     <RenderCtrlProvider { ...defaultComponents }>
-      <TestingComponent
-        { ...customComponents }
-        isFetching
+      <ComponentCustom
+        isLoading
       />
     </RenderCtrlProvider>
   ).find('#custom-loading').length;
@@ -102,9 +100,8 @@ test('Custom Components should overwrite Default Components with <RenderCtrlProv
 
   const customErrorComponentCount = mount(
     <RenderCtrlProvider { ...defaultComponents }>
-      <TestingComponent
-        { ...customComponents }
-        isFetching
+      <ComponentCustom
+        isLoading
         isError
       />
     </RenderCtrlProvider>

@@ -25,11 +25,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _LoadingComponent = function _LoadingComponent() {
-	return _react2.default.createElement(
-		'div',
-		{ id: _constant.localDefaultLoadingId },
-		'Loading'
-	);
+	return _react2.default.createElement('div', { id: _constant.localDefaultLoadingId });
 };
 var _EmptyComponent = function _EmptyComponent() {
 	return _react2.default.createElement('div', { id: _constant.localDefaultEmptyId });
@@ -58,7 +54,7 @@ function withRenderCtrl(WrappedComponent) {
 				var _props = this.props,
 				    isError = _props.isError,
 				    isDataReady = _props.isDataReady,
-				    isFetching = _props.isFetching,
+				    isLoading = _props.isLoading,
 				    fetchData = _props.fetchData,
 				    debug = _props.debug,
 				    shouldReloadEverytime = _props.shouldReloadEverytime;
@@ -75,18 +71,18 @@ function withRenderCtrl(WrappedComponent) {
 					console.log(WrappedComponent.name + ':');
 					console.log('[props.isError]: ' + isError);
 					console.log('[props.isDataReady]: ' + isDataReady);
-					console.log('[props.isFetching]: ' + isFetching);
+					console.log('[props.isLoading]: ' + isLoading);
 				}
 				// Render Logic
-				if (isError) return ErrorComponent();
+				if (isError) return _react2.default.createElement(ErrorComponent, null);
 				if (!shouldReloadEverytime) {
 					if (isDataReady) return _react2.default.createElement(WrappedComponent, this.props);
-					if (isFetching) return LoadingComponent();
-					return EmptyComponent();
+					if (isLoading) return _react2.default.createElement(LoadingComponent, null);
+					return _react2.default.createElement(EmptyComponent, null);
 				} else {
-					if (isFetching) return LoadingComponent();
+					if (isLoading) return _react2.default.createElement(LoadingComponent, null);
 					if (isDataReady) return _react2.default.createElement(WrappedComponent, this.props);
-					return EmptyComponent();
+					return _react2.default.createElement(EmptyComponent, null);
 				}
 				return _react2.default.createElement(WrappedComponent, this.props);
 			}
@@ -98,7 +94,7 @@ function withRenderCtrl(WrappedComponent) {
 	RenderCtrl.propTypes = {
 		isError: _propTypes.bool,
 		isDataReady: _propTypes.any,
-		isFetching: _propTypes.bool,
+		isLoading: _propTypes.bool,
 		debug: _propTypes.bool,
 		LoadingComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
 		EmptyComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
@@ -108,7 +104,7 @@ function withRenderCtrl(WrappedComponent) {
 	RenderCtrl.defaultProps = {
 		isError: false,
 		isDataReady: false,
-		isFetching: false,
+		isLoading: false,
 		debug: false,
 		LoadingComponent: null,
 		EmptyComponent: null,

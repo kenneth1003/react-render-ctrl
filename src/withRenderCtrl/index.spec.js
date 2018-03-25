@@ -29,7 +29,7 @@ test('isError should render <ErrorComponent />', () => {
   const len2 = mount(
     <TestingComponent
       isError
-      isFetching
+      isLoading
     />
   ).find('#' + localDefaultErrorId).length;
   expect(len2).toEqual(1);

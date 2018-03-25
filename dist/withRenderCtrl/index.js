@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _withRednerCtrl = require('./withRednerCtrl');
+var _withRenderCtrl = require('./withRenderCtrl');
 
-var _withRednerCtrl2 = _interopRequireDefault(_withRednerCtrl);
+var _withRenderCtrl2 = _interopRequireDefault(_withRenderCtrl);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _withRednerCtrl2.default;
+exports.default = _withRenderCtrl2.default;

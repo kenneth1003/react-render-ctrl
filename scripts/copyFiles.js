@@ -6,7 +6,7 @@ async function copyPackageJson() {
   const { devDependencies, scripts, jest, ...packageData } = JSON.parse(packageJsonData);
   const newPackageData = {
     ...packageData,
-    main: "/dist/index.js",
+    main: "index.js",
   }
 
   const buildPath = path.resolve(__dirname, '../dist/package.json');

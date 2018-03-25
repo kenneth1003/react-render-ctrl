@@ -13,12 +13,12 @@ Object.defineProperty(exports, 'RenderCtrlProvider', {
   }
 });
 
-var _withRednerCtrl = require('./withRednerCtrl');
+var _withRenderCtrl = require('./withRenderCtrl');
 
-Object.defineProperty(exports, 'withRednerCtrl', {
+Object.defineProperty(exports, 'withRenderCtrl', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withRednerCtrl).default;
+    return _interopRequireDefault(_withRenderCtrl).default;
   }
 });
 

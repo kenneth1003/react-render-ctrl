@@ -1,16 +1,22 @@
 import React from 'react';
 import { oneOfType, element, func } from 'prop-types';
 
-const LoadingComponent = () => <div id="default-loading">LoadingComponent</div>;
-const EmptyComponent = () => <div id="default-empty">EmptyComponent</div>;
-const ErrorComponent = () => <div id="default-error">ErrorComponent</div>;
-
 export default class RenderCtrlProvider extends React.Component {
+  static propTypes = {
+    LoadingComponent: oneOfType([element, func]),
+    EmptyComponent: oneOfType([element, func]),
+    ErrorComponent: oneOfType([element, func])
+  }
+  static defaultProps = {
+    LoadingComponent: () => process.env.NODE_ENV !== 'production' ? <div id="default-loading"></div> : null,
+    EmptyComponent: () => process.env.NODE_ENV !== 'production' ? <div id="default-empty"></div> : null,
+    ErrorComponent: () => process.env.NODE_ENV !== 'production' ? <div id="default-error">Something wrong happened</div> : null
+  }
   getChildContext() {
     return {
-	    LoadingComponent: this.props.LoadingComponent || LoadingComponent,
-	    EmptyComponent: this.props.EmptyComponent || EmptyComponent,
-	    ErrorComponent: this.props.ErrorComponent || ErrorComponent
+	    LoadingComponent: this.props.LoadingComponent,
+	    EmptyComponent: this.props.EmptyComponent,
+	    ErrorComponent: this.props.ErrorComponent
     };
   }
 
