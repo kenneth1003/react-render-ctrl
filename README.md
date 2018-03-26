@@ -1,9 +1,9 @@
 ## React-Render-Ctrl
-[![npm package][npm-badge]][npm]
+[![npm version](https://img.shields.io/npm/v/react-render-ctrl.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
+
 A component render control HOC for different states.
 ## Table of Content
 - [Intention](#intention)
-- [Quick Start](#quick-start)
 - [Examples](#examples)
   - [Basic Ssage](#basic-usage)
   - [Default State Component](#default-state-component)
@@ -12,10 +12,10 @@ A component render control HOC for different states.
 - [License](#license)
 ## Intention
 In react development we often face a problem of dealing with different states for some data driven components. In most cases, those states includes:
-- *Ideal State*. Happy path for the component, everything is OK.
-- *Loading State*. Component shows something indicate it is loading.
-- *Error State*. Component shows something went wrong.
-- *Empty State*. Component shows something indicate it is empty.
+- **Ideal State**. Happy path for the component, everything is OK.
+- **Loading State**. Component shows something indicate it is loading.
+- **Error State**. Component shows something went wrong.
+- **Empty State**. Component shows something indicate it is empty.
 
 For those components, you want to show proper hint to users base on component's state. The code may look something like the following:
 `container.js`
@@ -40,10 +40,10 @@ class Container extends React.Component {
 }
 ```
 The code above is not ideal, because
-1. Nested Ternary operator. If there are several component all implement these kind of logics, it is not easy to understand at a galance.
-2. Spreading logics. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
-3. Verbose importing. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
-4. Low cohesion. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
+1. **Nested Ternary operator**. If there are several components all implement this kind of logics, it is not easy to understand at a galance.
+2. **Spreading logics**. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
+3. **Verbose importing**. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
+4. **Lower cohesion**. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
 
 To address these problems, I think [Provdier Pattern](https://www.robinwieruch.de/react-provider-pattern-context/) would be a good solution. Provider provides global Loading, Empty, Error Components and use  High-Order-Component to wrap the component you would like to implement render logics. Like the following,
 `index.js`
@@ -100,9 +100,9 @@ class YourComponent extends React.Component {
   // ...
 }
 export default withRenderCtrl(YourComponent, {
-  ErrorComponent: () => <div>sth wrong</div>,
-  EmptyComponent: () => <div>it is empty</div>,
-  LoadingComponent: () => <div>loading</div>,
+  ErrorComponent: () => <div>something went wrong</div>,
+  EmptyComponent: () => <div>it is very empty</div>,
+  LoadingComponent: () => <div>I am loading</div>,
 });
 ```
 `container.js`
