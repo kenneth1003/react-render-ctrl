@@ -1,0 +1,62 @@
+{
+  "env": {
+      "es6": true,
+      "node": true,
+      "browser": true
+  },
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "parser": "babel-eslint",
+  "plugins": ["flowtype"],
+  "globals": {
+      "fb": true,
+      "ga": true,
+      "test": true,
+      "mount": true,
+      "expect": true
+  },
+  "rules": {
+      "indent": ["error", 2],
+      "comma-dangle": ["error", "never"],
+      "camelcase": "off",
+      "function-paren-newline": "off",
+      "href-no-hash": "off",
+      "prefer-template": "off",
+      "arrow-body-style": "off",
+      "no-unused-expressions": "off",
+      "no-unneeded-ternary": "off",
+      "quote-props": "off",
+      "no-loop-func": "off",
+      "no-plusplus": "off",
+      "no-nested-ternary": "off",
+      "no-use-before-define": "off",
+      "no-param-reassign": "off",
+      "no-underscore-dangle": "off",
+      "no-restricted-syntax": "off",
+      "no-shadow": "off",
+      "react/require-default-props": "off",
+      "react/no-string-refs": "off",
+      "react/no-danger": "off",
+      "react/jsx-indent": ["error", 2],
+      "react/jsx-curly-spacing": ["error", "always"],
+      "react/jsx-indent-props": ["error", 2],
+      "react/jsx-filename-extension": "off",
+      "react/forbid-prop-types": "off",
+      "react/sort-comp": "off",
+      "flowtype/no-types-missing-file-annotation": "off",
+      "import/no-extraneous-dependencies": "off",
+      "import/no-named-as-default-member": "off",
+      "import/no-named-as-default": "off",
+      "import/no-webpack-loader-syntax": "off",
+      "import/prefer-default-export": "off",
+      "import/extensions": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "jsx-a11y/href-no-hash": "off",
+      "jsx-a11y/anchor-has-content": "off",
+      "jsx-a11y/label-has-for": "off",
+      "no-tabs": [0],
+      "prefer-const": ["error", {
+          "destructuring": "any",
+          "ignoreReadBeforeAssign": false
+      }]
+  }
+}

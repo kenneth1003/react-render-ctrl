@@ -1,12 +1,12 @@
 import React from 'react';
-import withRenderCtrl from ".";
+import withRenderCtrl from '.';
 import {
-  localDefaultLoadingId,
-  localDefaultEmptyId,
+  // localDefaultLoadingId,
+  // localDefaultEmptyId,
   localDefaultErrorId
 } from '../constant';
 
-const IdealStatusComponent = () => <div id="ideal"></div>;
+const IdealStatusComponent = () => <div id="ideal" />;
 const TestingComponent = withRenderCtrl(IdealStatusComponent);
 
 test('isDataReady should render <IdealStatusComponent />', () => {

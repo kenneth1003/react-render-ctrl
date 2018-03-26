@@ -1,13 +1,13 @@
 import React from 'react';
-import withRenderCtrl from "./withRenderCtrl";
-import RenderCtrlProvider from "./RenderCtrlProvider";
+import withRenderCtrl from './withRenderCtrl';
+import RenderCtrlProvider from './RenderCtrlProvider';
 import {
   localDefaultLoadingId,
   localDefaultEmptyId,
   localDefaultErrorId
 } from './constant';
 
-const IdealStatusComponent = () => <div id="ideal"></div>;
+const IdealStatusComponent = () => <div id="ideal" />;
 const ComponentDefault = withRenderCtrl(IdealStatusComponent);
 
 const LoadingComponent = () => <div id="default-loading">LoadingComponent</div>;
@@ -33,7 +33,7 @@ const ComponentCustom = withRenderCtrl(IdealStatusComponent, customComponents);
 
 test('Local Default Components Should be accessed, when no provider', () => {
   const localDefaultEmptyComponentCount = mount(
-    <ComponentDefault debug/>
+    <ComponentDefault debug />
   ).find('#' + localDefaultEmptyId).length;
   expect(localDefaultEmptyComponentCount).toEqual(1);
   const localDefaultLoadingComponentCount = mount(
