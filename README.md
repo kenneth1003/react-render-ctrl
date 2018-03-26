@@ -11,13 +11,13 @@ A component render control HOC for different states.
 - [API](#api)
 - [License](#license)
 ## Intention
-In react development we often face a problem of dealing with different states for some data driven components. In most cases, those states includes:
-- *Ideal State*. Happy path for the component, everything is OK.
-- *Loading State*. Component shows something indicate it is loading.
-- *Error State*. Component shows something went wrong.
-- *Empty State*. Component shows something indicate it is empty.
+In react development we often face a problem of dealing with different states for some data-driven components. In most cases, those states include:
+- **Ideal State**. The happy path for the component, everything is OK.
+- **Loading State**. Component shows something to indicate it is loading.
+- **Error State**. Component shows something went wrong.
+- **Empty State**. Component shows something to indicate it is empty.
 
-For those components, you want to show proper hint to users base on component's state. The code may look something like the following:
+For those components, you would like to show a proper hint to users base on component's state. The code may look something like the following:
 `container.js`
 
 ```jsx
@@ -40,12 +40,12 @@ class Container extends React.Component {
 }
 ```
 The code above is not ideal, because
-1. Nested Ternary operator. If there are several component all implement these kind of logics, it is not easy to understand at a galance.
-2. Spreading logics. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
-3. Verbose importing. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
-4. Low cohesion. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
+1. **Nested Ternary operator**. If there are several components all implement this kind of logic, it is not easy to understand at a galance.
+2. **Spreading logics**. This kind of similar logic can be generalized and be handled in a single place instead of spreading all over the code base.
+3. **Verbose importing**. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
+4. **Lower cohesion**. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
 
-To address these problems, I think [Provdier Pattern](https://www.robinwieruch.de/react-provider-pattern-context/) would be a good solution. Provider provides global Loading, Empty, Error Components and use  High-Order-Component to wrap the component you would like to implement render logics. Like the following,
+To address these problems, I think [Provider Pattern](https://www.robinwieruch.de/react-provider-pattern-context/) would be a good solution. Provider provides global Loading, Empty, Error Components and uses  High-Order-Component to wrap the component you would like to implement render logic. Like the following,
 `index.js`
 ```jsx
 <RenderCtrlProvider
@@ -167,7 +167,8 @@ class Container extends React.Component {
 }
 ```
 ### Customized State Component
-As above, you still can provide customized state component to `YourComponent`. It will overwrite the default state component.
+As above, you still can provide customized **state components** to `YourComponent`. It will overwrite the default **state components**.
+
 `YourComponent.js`
 ```jsx
 import React from 'react';
@@ -228,6 +229,12 @@ StateComponent: {
 |`isDataReady`|`bool`|`false`||
 |`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` while `isLoading` is true even if data is ready|
 |`debug`|`bool`|`false`|log debug info in the console while `process.env.NODE_ENV !== 'production'`|
+
+## TODO
+- Flow typing
+- higher test coverage
+- pre-build code-checking
+- CI/CD
 
 ## License
 MIT
