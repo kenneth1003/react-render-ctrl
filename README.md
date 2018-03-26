@@ -4,6 +4,7 @@
 A component render control HOC for different states.
 ## Table of Content
 - [Intention](#intention)
+- [Installation](#installation)
 - [Examples](#examples)
   - [Basic Ssage](#basic-usage)
   - [Default State Component](#default-state-component)
@@ -86,11 +87,16 @@ class Container extends Component {
 ```
 This appoarch alleviates the problems we mention above.
 
-## Examples
-installation:
+## Installation
 `npm install react-render-ctrl` or `yarn add react-render-ctrl`
+
+## Examples
+The **State Components** in the following means
+- `LoadingComponent`
+- `ErrorComponent`
+- `EmptyComponent`
 ### Basic Usage
-You can use it directly without using `RenderCtrlProvider`, if you don't need to config your default state components.
+You can use it directly without using `RenderCtrlProvider`, if you don't need to config your default **state components**.
 `YourComponent.js`
 ```jsx
 import React from 'react';
@@ -123,7 +129,7 @@ class Container extends React.Component {
 }
 ```
 ### Default State Component
-If you need to config your default state components, you have to implement `<RenderCtrlProvider />` in the root of your application.
+If you need to config your default **state components**, you have to implement `<RenderCtrlProvider />` in the root of your application.
 `index.js`
 ```jsx
 ReactDOM.render(
@@ -138,7 +144,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-In your component you don't need to pass state component as argument to the `withRenderCtrl` function.
+In your component you don't need to pass **state component** as argument to the `withRenderCtrl` function.
 `YourComponent.js`
 ```jsx
 import React from 'react';
@@ -167,7 +173,7 @@ class Container extends React.Component {
 }
 ```
 ### Customized State Component
-As above, you still can provide customized state component to `YourComponent`. It will overwrite the default state component.
+As above, you still can provide customized **state components** to `YourComponent`. It will overwrite the default **state components**.
 `YourComponent.js`
 ```jsx
 import React from 'react';
