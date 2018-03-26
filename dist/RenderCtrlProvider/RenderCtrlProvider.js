@@ -20,28 +20,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LoadingComponent = function LoadingComponent() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'default-loading' },
-    'LoadingComponent'
-  );
-};
-var EmptyComponent = function EmptyComponent() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'default-empty' },
-    'EmptyComponent'
-  );
-};
-var ErrorComponent = function ErrorComponent() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'default-error' },
-    'ErrorComponent'
-  );
-};
-
 var RenderCtrlProvider = function (_React$Component) {
   _inherits(RenderCtrlProvider, _React$Component);
 
@@ -55,9 +33,9 @@ var RenderCtrlProvider = function (_React$Component) {
     key: 'getChildContext',
     value: function getChildContext() {
       return {
-        LoadingComponent: this.props.LoadingComponent || LoadingComponent,
-        EmptyComponent: this.props.EmptyComponent || EmptyComponent,
-        ErrorComponent: this.props.ErrorComponent || ErrorComponent
+        LoadingComponent: this.props.LoadingComponent,
+        EmptyComponent: this.props.EmptyComponent,
+        ErrorComponent: this.props.ErrorComponent
       };
     }
   }, {
@@ -74,6 +52,26 @@ var RenderCtrlProvider = function (_React$Component) {
   return RenderCtrlProvider;
 }(_react2.default.Component);
 
+RenderCtrlProvider.propTypes = {
+  LoadingComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
+  EmptyComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
+  ErrorComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func])
+};
+RenderCtrlProvider.defaultProps = {
+  LoadingComponent: function LoadingComponent() {
+    return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: 'default-loading' }) : null;
+  },
+  EmptyComponent: function EmptyComponent() {
+    return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: 'default-empty' }) : null;
+  },
+  ErrorComponent: function ErrorComponent() {
+    return process.env.NODE_ENV !== 'production' ? _react2.default.createElement(
+      'div',
+      { id: 'default-error' },
+      'Something wrong happened'
+    ) : null;
+  }
+};
 exports.default = RenderCtrlProvider;
 
 

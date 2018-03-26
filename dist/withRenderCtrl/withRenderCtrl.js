@@ -39,6 +39,8 @@ var _ErrorComponent = function _ErrorComponent() {
 };
 
 function withRenderCtrl(WrappedComponent) {
+	var stateComponents = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	var RenderCtrl = function (_Component) {
 		_inherits(RenderCtrl, _Component);
 
@@ -60,18 +62,19 @@ function withRenderCtrl(WrappedComponent) {
 				    shouldReloadEverytime = _props.shouldReloadEverytime;
 
 				var DebugWrapper = void 0;
-
 				// set status component
-				var LoadingComponent = this.props.LoadingComponent || this.context.LoadingComponent || _LoadingComponent;
+				var LoadingComponent = stateComponents.LoadingComponent || this.context.LoadingComponent || _LoadingComponent;
 
-				var EmptyComponent = this.props.EmptyComponent || this.context.EmptyComponent || _EmptyComponent;
+				var EmptyComponent = stateComponents.EmptyComponent || this.context.EmptyComponent || _EmptyComponent;
 
-				var ErrorComponent = this.props.ErrorComponent || this.context.ErrorComponent || _ErrorComponent;
+				var ErrorComponent = stateComponents.ErrorComponent || this.context.ErrorComponent || _ErrorComponent;
 				if (process.env.NODE_ENV !== 'production' && debug) {
 					console.log(WrappedComponent.name + ':');
+					console.group();
 					console.log('[props.isError]: ' + isError);
 					console.log('[props.isDataReady]: ' + isDataReady);
 					console.log('[props.isLoading]: ' + isLoading);
+					console.groupEnd();
 				}
 				// Render Logic
 				if (isError) return _react2.default.createElement(ErrorComponent, null);
@@ -96,9 +99,6 @@ function withRenderCtrl(WrappedComponent) {
 		isDataReady: _propTypes.any,
 		isLoading: _propTypes.bool,
 		debug: _propTypes.bool,
-		LoadingComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
-		EmptyComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
-		ErrorComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
 		shouldReloadEverytime: _propTypes.bool
 	};
 	RenderCtrl.defaultProps = {
@@ -106,9 +106,6 @@ function withRenderCtrl(WrappedComponent) {
 		isDataReady: false,
 		isLoading: false,
 		debug: false,
-		LoadingComponent: null,
-		EmptyComponent: null,
-		ErrorComponent: null,
 		shouldReloadEverytime: false
 	};
 	;

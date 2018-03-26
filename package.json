@@ -1,6 +1,6 @@
 {
   "name": "react-render-ctrl",
-  "version": "1.0.0-dev4",
+  "version": "1.0.0-dev5",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {

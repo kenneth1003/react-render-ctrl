@@ -6,10 +6,9 @@ import {
   localDefaultErrorId
 } from '../constant';
 
-
-const _LoadingComponent = () => <div id={ localDefaultLoadingId }></div>;
-const _EmptyComponent = () => <div id={ localDefaultEmptyId } />;
-const _ErrorComponent = () => <div id={ localDefaultErrorId }>Error</div>;
+const _LoadingComponent = () => process.env.NODE_ENV !== 'production' ? <div id={ localDefaultLoadingId }></div> : null;
+const _EmptyComponent = () => process.env.NODE_ENV !== 'production' ? <div id={ localDefaultEmptyId } /> : null;
+const _ErrorComponent = () => process.env.NODE_ENV !== 'production' ? <div id={ localDefaultErrorId }>Error</div> : null;
 
 export default function withRenderCtrl (
 	WrappedComponent,
@@ -56,12 +55,11 @@ export default function withRenderCtrl (
         this.context.ErrorComponent ||
         _ErrorComponent;
       if (process.env.NODE_ENV !== 'production' && debug) {
-				console.log(WrappedComponent.name + ':');
-				console.group();
+				console.group(WrappedComponent.name);
         console.log(`[props.isError]: ${isError}`);
         console.log(`[props.isDataReady]: ${isDataReady}`);
 				console.log(`[props.isLoading]: ${isLoading}`);
-				console.groupEnd();
+				console.groupEnd(WrappedComponent.name);
       }
       // Render Logic
 			if (isError) return <ErrorComponent />;
