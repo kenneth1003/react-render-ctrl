@@ -11,11 +11,11 @@ A component render control HOC for different states.
 - [API](#api)
 - [License](#license)
 ## Intention
-In react development we often face a problem of dealing with different states for some components. In most cases, those states includes:
-- Ideal State
-- Loading State
-- Error State
-- Empty State
+In react development we often face a problem of dealing with different states for some data driven components. In most cases, those states includes:
+- *Ideal State*. Happy path for the component, everything is OK.
+- *Loading State*. Component shows something indicate it is loading.
+- *Error State*. Component shows something went wrong.
+- *Empty State*. Component shows something indicate it is empty.
 
 For those components, you want to show proper hint to users base on component's state. The code may look something like the following:
 `container.js`
@@ -41,17 +41,17 @@ class Container extends React.Component {
 ```
 The code above is not ideal, because
 1. Nested Ternary operator. If there are several component all implement these kind of logics, it is not easy to understand at a galance.
-2. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
-3. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
-4. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
+2. Spreading logics. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
+3. Verbose importing. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
+4. Low cohesion. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
 
 To address these problems, I think [Provdier Pattern](https://www.robinwieruch.de/react-provider-pattern-context/) would be a good solution. Provider provides global Loading, Empty, Error Components and use  High-Order-Component to wrap the component you would like to implement render logics. Like the following,
 `index.js`
 ```jsx
 <RenderCtrlProvider
-  ErrorComponent={ /* your default error hint component */ }
-  EmptyComponent={ /* your default empty component */ }
-  LoadingComponent={ /* your default loading component */ }
+  ErrorComponent={ () => <div>default error hint</div> }
+  EmptyComponent={ () => <div>default empty hint</div> }
+  LoadingComponent={ () => <div>default loading hint</div> }
 >
   <YourApp />
 </RenderCtrlProvider>
@@ -113,9 +113,9 @@ class Container extends React.Component {
     return (
       // ...
       <YourComponent
-        isError={ /* your corresponding logic */ }
-        isLoading={ /* your corresponding logic */ }
-        isDataReady={ /* your corresponding logic */ }
+        isError={ something.went.wrong }
+        isLoading={ api.isFetching }
+        isDataReady={ data.length > 0 && data[0].value }
       />
       // ...
     );
@@ -128,9 +128,9 @@ If you need to config your default state components, you have to implement `<Ren
 ```jsx
 ReactDOM.render(
   <RenderCtrlProvider
-    ErrorComponent={ /* your default error hint component */ }
-    EmptyComponent={ /* your default empty component */ }
-    LoadingComponent={ /* your default loading component */ }
+    ErrorComponent={ () => <div>default error hint</div> }
+    EmptyComponent={ () => <div>default empty hint</div> }
+    LoadingComponent={ () => <div>default loading hint</div> }
   >
     <YourApp />
   </RenderCtrlProvider>
@@ -157,9 +157,9 @@ class Container extends React.Component {
     return (
       // ...
       <YourComponent
-        isError={ /* your corresponding logic */ }
-        isLoading={ /* your corresponding logic */ }
-        isDataReady={ /* your corresponding logic */ }
+        isError={ something.went.wrong }
+        isLoading={ api.isFetching }
+        isDataReady={ data.length > 0 && data[0].value }
       />
       // ...
     );
@@ -190,9 +190,9 @@ class Container extends React.Component {
     return (
       // ...
       <YourComponent
-        isError={ /* your corresponding logic */ }
-        isLoading={ /* your corresponding logic */ }
-        isDataReady={ /* your corresponding logic */ }
+        isError={ something.went.wrong }
+        isLoading={ api.isFetching }
+        isDataReady={ data.length > 0 && data[0].value }
       />
       // ...
     );
@@ -201,9 +201,9 @@ class Container extends React.Component {
 ```
 ## API
 ##### withRenderCtrl (WrappedComponent, [StateComponents])
-```
+```js
 // Arguments Type
-WrappedComponent: ReactComponent
+WrappedComponent: ReactComponent,
 StateComponent: {
   ErrorComponent: ReactComponent,
   EmptyComponent: ReactComponent,
@@ -226,8 +226,8 @@ StateComponent: {
 |`isError`|`bool`|`false`||
 |`isLoading`|`bool`|`false`||
 |`isDataReady`|`bool`|`false`||
-|`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` when `isLoading` is true even if data is ready|
-|`debug`|`bool`|`false`|log debug info in the console when `process.env.NODE_ENV !== 'production'`|
+|`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` while `isLoading` is true even if data is ready|
+|`debug`|`bool`|`false`|log debug info in the console while `process.env.NODE_ENV !== 'production'`|
 
 ## License
 MIT
