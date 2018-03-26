@@ -1,10 +1,9 @@
 ## React-Render-Ctrl
-[![npm version](https://img.shields.io/npm/v/react-render-ctrl.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
-
+[![npm package][npm-badge]][npm]
 A component render control HOC for different states.
 ## Table of Content
 - [Intention](#intention)
-- [Installation](#installation)
+- [Quick Start](#quick-start)
 - [Examples](#examples)
   - [Basic Ssage](#basic-usage)
   - [Default State Component](#default-state-component)
@@ -13,10 +12,10 @@ A component render control HOC for different states.
 - [License](#license)
 ## Intention
 In react development we often face a problem of dealing with different states for some data driven components. In most cases, those states includes:
-- **Ideal State**. Happy path for the component, everything is OK.
-- **Loading State**. Component shows something indicate it is loading.
-- **Error State**. Component shows something went wrong.
-- **Empty State**. Component shows something indicate it is empty.
+- *Ideal State*. Happy path for the component, everything is OK.
+- *Loading State*. Component shows something indicate it is loading.
+- *Error State*. Component shows something went wrong.
+- *Empty State*. Component shows something indicate it is empty.
 
 For those components, you want to show proper hint to users base on component's state. The code may look something like the following:
 `container.js`
@@ -41,10 +40,10 @@ class Container extends React.Component {
 }
 ```
 The code above is not ideal, because
-1. **Nested Ternary operator**. If there are several components all implement this kind of logics, it is not easy to understand at a galance.
-2. **Spreading logics**. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
-3. **Verbose importing**. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
-4. **Lower cohesion**. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
+1. Nested Ternary operator. If there are several component all implement these kind of logics, it is not easy to understand at a galance.
+2. Spreading logics. These kind of similar logics can be generalize and be handled in single place instead of spreading all over the code base.
+3. Verbose importing. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are the same across the project, you still have to import all of them to wherever they are used. It makes the code more verbose.
+4. Low cohesion. If `<ErrorHint />`, `<LoadingSpinner />`, `<EmptyHint />` are specific for the component, then they should be located in the `component.js` instead of in the `container.js` for higher cohesion.
 
 To address these problems, I think [Provdier Pattern](https://www.robinwieruch.de/react-provider-pattern-context/) would be a good solution. Provider provides global Loading, Empty, Error Components and use  High-Order-Component to wrap the component you would like to implement render logics. Like the following,
 `index.js`
@@ -87,16 +86,11 @@ class Container extends Component {
 ```
 This appoarch alleviates the problems we mention above.
 
-## Installation
-`npm install react-render-ctrl` or `yarn add react-render-ctrl`
-
 ## Examples
-The **State Components** in the following means
-- `LoadingComponent`
-- `ErrorComponent`
-- `EmptyComponent`
+installation:
+`npm install react-render-ctrl` or `yarn add react-render-ctrl`
 ### Basic Usage
-You can use it directly without using `RenderCtrlProvider`, if you don't need to config your default **state components**.
+You can use it directly without using `RenderCtrlProvider`, if you don't need to config your default state components.
 `YourComponent.js`
 ```jsx
 import React from 'react';
@@ -106,9 +100,9 @@ class YourComponent extends React.Component {
   // ...
 }
 export default withRenderCtrl(YourComponent, {
-  ErrorComponent: () => <div>something went wrong</div>,
-  EmptyComponent: () => <div>it is very empty</div>,
-  LoadingComponent: () => <div>I am loading</div>,
+  ErrorComponent: () => <div>sth wrong</div>,
+  EmptyComponent: () => <div>it is empty</div>,
+  LoadingComponent: () => <div>loading</div>,
 });
 ```
 `container.js`
@@ -129,7 +123,7 @@ class Container extends React.Component {
 }
 ```
 ### Default State Component
-If you need to config your default **state components**, you have to implement `<RenderCtrlProvider />` in the root of your application.
+If you need to config your default state components, you have to implement `<RenderCtrlProvider />` in the root of your application.
 `index.js`
 ```jsx
 ReactDOM.render(
@@ -144,7 +138,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-In your component you don't need to pass **state component** as argument to the `withRenderCtrl` function.
+In your component you don't need to pass state component as argument to the `withRenderCtrl` function.
 `YourComponent.js`
 ```jsx
 import React from 'react';
@@ -173,7 +167,7 @@ class Container extends React.Component {
 }
 ```
 ### Customized State Component
-As above, you still can provide customized **state components** to `YourComponent`. It will overwrite the default **state components**.
+As above, you still can provide customized state component to `YourComponent`. It will overwrite the default state component.
 `YourComponent.js`
 ```jsx
 import React from 'react';
