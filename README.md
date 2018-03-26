@@ -200,7 +200,7 @@ class Container extends React.Component {
 }
 ```
 ## API
-#####withRenderCtrl (WrappedComponent, [StateComponents])
+##### withRenderCtrl (WrappedComponent, [StateComponents])
 ```
 // Arguments Type
 WrappedComponent: ReactComponent
@@ -210,15 +210,17 @@ StateComponent: {
   LoadingComponent: ReactComponent
 }
 ```
-#####RenderCtrlProvider
+##### RenderCtrlProvider
+
 |props|type|default|description|
 |-|-|-|-|
 |`ErrorComponent`|`element`|`null`||
 |`EmptyComponent`|`element`|`null`||
 |`LoadingComponent`|`element`|`null`||
 
-#####EnhancedComponent
+##### EnhancedComponent
 `EnhancedComponent` is the return of `withRenderCtrl`.
+
 |props|type|default|description|
 |-|-|-|-|
 |`isError`|`bool`|`false`||
@@ -227,5 +229,5 @@ StateComponent: {
 |`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` when `isLoading` is true even if data is ready|
 |`debug`|`bool`|`false`|log debug info in the console when `process.env.NODE_ENV !== 'production'`|
 
-##License
+## License
 MIT
