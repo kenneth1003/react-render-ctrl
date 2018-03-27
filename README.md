@@ -8,6 +8,7 @@ A component render control HOC for different states.
   - [Basic Ssage](#basic-usage)
   - [Default State Component](#default-state-component)
   - [Customized State Component](#customized-state-component)
+- [Render Flow](#render-flow)
 - [API](#api)
 - [License](#license)
 ## Intention
@@ -200,6 +201,11 @@ class Container extends React.Component {
   }
 }
 ```
+## Render Flow
+Squares with gray background are **State Components**
+
+![Render Flow](https://raw.githubusercontent.com/kenneth1003/react-render-ctrl/master/render-flow.jpg)
+
 ## API
 ##### withRenderCtrl (WrappedComponent, [StateComponents])
 ```js
