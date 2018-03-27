@@ -1,9 +1,10 @@
 ## React-Render-Ctrl
-[![npm package][npm-badge]][npm]
+[![npm version](https://img.shields.io/npm/v/react-render-ctrl.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
+
 A component render control HOC for different states.
 ## Table of Content
 - [Intention](#intention)
-- [Quick Start](#quick-start)
+- [Installation](#installation)
 - [Examples](#examples)
   - [Basic Ssage](#basic-usage)
   - [Default State Component](#default-state-component)
@@ -87,9 +88,14 @@ class Container extends Component {
 ```
 This appoarch alleviates the problems we mention above.
 
-## Examples
-installation:
+## Installation
 `npm install react-render-ctrl` or `yarn add react-render-ctrl`
+
+## Examples
+The **State Components** in the following means
+- `LoadingComponent`
+- `ErrorComponent`
+- `EmptyComponent`
 ### Basic Usage
 You can use it directly without using `RenderCtrlProvider`, if you don't need to config your default state components.
 `YourComponent.js`
@@ -101,9 +107,9 @@ class YourComponent extends React.Component {
   // ...
 }
 export default withRenderCtrl(YourComponent, {
-  ErrorComponent: () => <div>sth wrong</div>,
-  EmptyComponent: () => <div>it is empty</div>,
-  LoadingComponent: () => <div>loading</div>,
+  ErrorComponent: () => <div>something went wrong</div>,
+  EmptyComponent: () => <div>it is very empty</div>,
+  LoadingComponent: () => <div>I am loading</div>
 });
 ```
 `container.js`
@@ -124,7 +130,7 @@ class Container extends React.Component {
 }
 ```
 ### Default State Component
-If you need to config your default state components, you have to implement `<RenderCtrlProvider />` in the root of your application.
+If you need to config your default **state components**, you have to implement `<RenderCtrlProvider />` in the root of your application.
 `index.js`
 ```jsx
 ReactDOM.render(
@@ -139,7 +145,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-In your component you don't need to pass state component as argument to the `withRenderCtrl` function.
+In your component you don't need to pass **state component** as argument to the `withRenderCtrl` function.
 `YourComponent.js`
 ```jsx
 import React from 'react';
