@@ -1,10 +1,14 @@
 {
   "name": "react-render-ctrl",
-  "version": "1.0.0-dev5",
+  "version": "1.0.0-beta.0",
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
+  },
+  "dependencies": {
+    "install": "^0.11.0",
+    "yarn": "^1.5.1"
   }
 }

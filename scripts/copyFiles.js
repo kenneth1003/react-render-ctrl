@@ -1,5 +1,6 @@
 const path = require('path');
 const fse = require('fs-extra');
+const { exec } = require('child_process');
 
 async function copyPackageJson() {
   const packageJsonData = await fse.readFile(path.resolve(__dirname, '../package.json'), 'utf8');
@@ -15,4 +16,9 @@ async function copyPackageJson() {
   console.log(`Created package.json in ${buildPath}`);
 }
 
+function copyReadme() {
+  exec('cp README.md dist');
+}
+
 copyPackageJson();
+copyReadme();

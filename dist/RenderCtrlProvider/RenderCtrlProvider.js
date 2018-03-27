@@ -31,6 +31,8 @@ var RenderCtrlProvider = function (_React$Component) {
 
   _createClass(RenderCtrlProvider, [{
     key: 'getChildContext',
+
+    // eslint-disable-next-line no-undef
     value: function getChildContext() {
       return {
         LoadingComponent: this.props.LoadingComponent,
@@ -38,6 +40,8 @@ var RenderCtrlProvider = function (_React$Component) {
         ErrorComponent: this.props.ErrorComponent
       };
     }
+    // eslint-disable-next-line no-undef
+
   }, {
     key: 'render',
     value: function render() {
@@ -53,10 +57,10 @@ var RenderCtrlProvider = function (_React$Component) {
 }(_react2.default.Component);
 
 RenderCtrlProvider.propTypes = {
+  children: _propTypes.element.isRequired,
   LoadingComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
   EmptyComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]),
-  ErrorComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func])
-};
+  ErrorComponent: (0, _propTypes.oneOfType)([_propTypes.element, _propTypes.func]) };
 RenderCtrlProvider.defaultProps = {
   LoadingComponent: function LoadingComponent() {
     return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: 'default-loading' }) : null;
@@ -65,11 +69,7 @@ RenderCtrlProvider.defaultProps = {
     return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: 'default-empty' }) : null;
   },
   ErrorComponent: function ErrorComponent() {
-    return process.env.NODE_ENV !== 'production' ? _react2.default.createElement(
-      'div',
-      { id: 'default-error' },
-      'Something wrong happened'
-    ) : null;
+    return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: 'default-error' }) : null;
   }
 };
 exports.default = RenderCtrlProvider;
