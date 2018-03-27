@@ -2461,10 +2461,6 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-install@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/install/-/install-0.11.0.tgz#e539d3c7db572ab5081d3780de20796dd3cc842e"
-
 invariant@^2.2.0, invariant@^2.2.2:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -4889,7 +4885,3 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
-
-yarn@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.5.1.tgz#e8680360e832ac89521eb80dad3a7bc27a40bab4"
