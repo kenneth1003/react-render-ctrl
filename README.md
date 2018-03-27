@@ -257,7 +257,7 @@ StateComponent: {
 - CI/CD
 
 ## Change Log
-####v1.0.0-beta.0
+#### v1.0.0-beta.0
 initial version
 
 ## License
