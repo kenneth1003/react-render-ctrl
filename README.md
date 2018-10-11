@@ -6,7 +6,8 @@ A component render control HOC for different states.
 - [Intention](#intention)
 - [Installation](#installation)
 - [Examples](#examples)
-  - [Basic Ssage](#basic-usage)
+  - [Basic Usage](#basic-usage)
+  - [With Redux](#with-redux)
   - [Default State Component](#default-state-component)
   - [Customized State Component](#customized-state-component)
 - [Render Flow](#render-flow)
@@ -118,6 +119,44 @@ export default withRenderCtrl(YourComponent, {
   EmptyComponent: () => <div>it is very empty</div>,
   LoadingComponent: () => <div>I am loading</div>
 });
+```
+`container.js`
+```jsx
+class Container extends React.Component {
+  // ...
+  render() {
+    return (
+      // ...
+      <YourComponent
+        isError={ something.went.wrong }
+        isLoading={ api.isFetching }
+        isDataReady={ data.length > 0 && data[0].value }
+      />
+      // ...
+    );
+  }
+}
+```
+### With Redux
+Since you are not directly pass props to container which is connected with redux, you can set your `isDataReady` props in the `mapStateToProps` function.
+```jsx
+import React from 'react';
+import { withRenderCtrl } from 'react-render-ctrl';
+// ...
+class YourComponent extends React.Component {
+  // ...
+}
+function mapStateToProps(state) {
+  return  {
+    //...
+    isDateReady: state.data.length > 0 && data[0].value
+  }
+}
+export default connect(mapStateToProps)(withRenderCtrl(YourComponent, {
+  ErrorComponent: () => <div>something went wrong</div>,
+  EmptyComponent: () => <div>it is very empty</div>,
+  LoadingComponent: () => <div>I am loading</div>
+}));
 ```
 `container.js`
 ```jsx
@@ -251,6 +290,8 @@ StateComponent: {
 
 ## TODO
 #### development
+- Error payload support
+- React native support
 - Flow typing
 - higher test coverage
 - pre-build code-checking
