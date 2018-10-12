@@ -1,5 +1,5 @@
 ## React-Render-Ctrl
-[![npm version](https://img.shields.io/badge/npm-v1.0.1-brightgreen.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
+[![npm version](https://img.shields.io/badge/npm-v1.1.0-brightgreen.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
 
 A component render control HOC for different states.
 ## Table of Content

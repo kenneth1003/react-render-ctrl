@@ -14,7 +14,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _propTypes = require('prop-types');
 
-var _constant = require('../constant');
+var _Error = require('../defaultComponents/Error');
+
+var _Error2 = _interopRequireDefault(_Error);
+
+var _Loading = require('../defaultComponents/Loading');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
+var _Empty = require('../defaultComponents/Empty');
+
+var _Empty2 = _interopRequireDefault(_Empty);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,16 +33,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _LoadingComponent = function _LoadingComponent() {
-  return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: _constant.localDefaultLoadingId }) : null;
-};
-var _EmptyComponent = function _EmptyComponent() {
-  return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: _constant.localDefaultEmptyId }) : null;
-};
-var _ErrorComponent = function _ErrorComponent() {
-  return process.env.NODE_ENV !== 'production' ? _react2.default.createElement('div', { id: _constant.localDefaultErrorId }) : null;
-};
 
 function withRenderCtrl(WrappedComponent) {
   var stateComponents = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -56,34 +56,40 @@ function withRenderCtrl(WrappedComponent) {
             isError = _props.isError,
             isDataReady = _props.isDataReady,
             isLoading = _props.isLoading,
+            errorComponentProps = _props.errorComponentProps,
+            loadingComponentProps = _props.loadingComponentProps,
+            emptyComponentProps = _props.emptyComponentProps,
             debug = _props.debug,
             shouldReloadEverytime = _props.shouldReloadEverytime;
         // set status component
 
-        var LoadingComponent = stateComponents.LoadingComponent || this.context.LoadingComponent || _LoadingComponent;
+        var LoadingComponent = stateComponents.LoadingComponent || this.context.LoadingComponent || _Loading2.default;
 
-        var EmptyComponent = stateComponents.EmptyComponent || this.context.EmptyComponent || _EmptyComponent;
+        var EmptyComponent = stateComponents.EmptyComponent || this.context.EmptyComponent || _Empty2.default;
 
-        var ErrorComponent = stateComponents.ErrorComponent || this.context.ErrorComponent || _ErrorComponent;
+        var ErrorComponent = stateComponents.ErrorComponent || this.context.ErrorComponent || _Error2.default;
         if (process.env.NODE_ENV !== 'production' && debug) {
           /* eslint-disable no-console */
           console.group(WrappedComponent.name);
           console.log('[props.isError]: ' + isError);
           console.log('[props.isDataReady]: ' + isDataReady);
           console.log('[props.isLoading]: ' + isLoading);
+          console.log('[props.errorComponentProps]: ' + errorComponentProps);
+          console.log('[props.loadingComponentProps]: ' + loadingComponentProps);
+          console.log('[props.emptyComponentProps]: ' + emptyComponentProps);
           console.groupEnd(WrappedComponent.name);
           /* eslint-enable no-console */
         }
         // Render Logic
-        if (isError) return _react2.default.createElement(ErrorComponent, null);
+        if (isError) return _react2.default.createElement(ErrorComponent, errorComponentProps);
         if (!shouldReloadEverytime) {
           if (isDataReady) return _react2.default.createElement(WrappedComponent, this.props);
-          if (isLoading) return _react2.default.createElement(LoadingComponent, null);
-          return _react2.default.createElement(EmptyComponent, null);
+          if (isLoading) return _react2.default.createElement(LoadingComponent, loadingComponentProps);
+          return _react2.default.createElement(EmptyComponent, emptyComponentProps);
         }
-        if (isLoading) return _react2.default.createElement(LoadingComponent, null);
+        if (isLoading) return _react2.default.createElement(LoadingComponent, loadingComponentProps);
         if (isDataReady) return _react2.default.createElement(WrappedComponent, this.props);
-        return _react2.default.createElement(EmptyComponent, null);
+        return _react2.default.createElement(EmptyComponent, emptyComponentProps);
       }
     }]);
 
@@ -92,8 +98,11 @@ function withRenderCtrl(WrappedComponent) {
 
   RenderCtrl.propTypes = {
     isError: _propTypes.bool,
-    isDataReady: _propTypes.any,
+    isDataReady: _propTypes.bool,
     isLoading: _propTypes.bool,
+    errorComponentProps: _propTypes.object,
+    loadingComponentProps: _propTypes.object,
+    emptyComponentProps: _propTypes.object,
     debug: _propTypes.bool,
     shouldReloadEverytime: _propTypes.bool
   };
@@ -101,6 +110,9 @@ function withRenderCtrl(WrappedComponent) {
     isError: false,
     isDataReady: false,
     isLoading: false,
+    errorComponentProps: {},
+    loadingComponentProps: {},
+    emptyComponentProps: {},
     debug: false,
     shouldReloadEverytime: false
   };
