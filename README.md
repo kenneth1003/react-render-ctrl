@@ -253,6 +253,34 @@ class Container extends React.Component {
   }
 }
 ```
+
+You can also pass specific props to you customized Component, like:
+```jsx
+class Container extends React.Component {
+  // ...
+  render() {
+    return (
+      // ...
+      <YourComponent
+        isError={ something.went.wrong }
+        isLoading={ api.isFetching }
+        isDataReady={ data.length > 0 && data[0].value }
+        errorComponentProps={ { errorMsg: 'something went wrong' } }
+      />
+      // ...
+    );
+  }
+}
+```
+then your `errorComponent` knows what to show base on the `errorComponentProps`.
+It works like:
+```jsx
+<YourCustomizeErrorComponent
+  { ...errorComponentProps }
+/>
+```
+So do **loading** and **empty** Components
+
 ## Render Flow
 Squares with gray background are [state components](#examples)
 
@@ -285,6 +313,9 @@ StateComponent: {
 |`isError`|`bool`|`false`||
 |`isLoading`|`bool`|`false`||
 |`isDataReady`|`bool`|`false`||
+|`errorComponentProps`|`Object`|`{}`|props for customized error component to show specific information|
+|`loadingComponentProps`|`Object`|`{}`|props for customized loading component to show specific information|
+|`emptyComponentProps`|`Object`|`{}`|props for customized empty component to show specific information|
 |`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` while `isLoading` is true even if data is ready|
 |`debug`|`bool`|`false`|log debug info in the console while `process.env.NODE_ENV !== 'production'`|
 

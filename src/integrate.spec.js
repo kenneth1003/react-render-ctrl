@@ -20,9 +20,31 @@ const defaultComponents = {
   ErrorComponent
 };
 
-const CustomLoadingComponent = () => <div id="custom-loading">CustomLoadingComponent</div>;
-const CustomEmptyComponent = () => <div id="custom-empty">CustomEmptyComponent</div>;
-const CustomErrorComponent = () => <div id="custom-error">CustomErrorComponent</div>;
+/* eslint-disable react/prop-types */
+const CustomLoadingComponent = ({ testProp }) => (
+  <div
+    id="custom-loading"
+    className={ testProp }
+  >
+    CustomLoadingComponent
+  </div>
+);
+const CustomEmptyComponent = ({ testProp }) => (
+  <div
+    id="custom-empty"
+    className={ testProp }
+  >
+    CustomEmptyComponent
+  </div>
+);
+const CustomErrorComponent = ({ testProp }) => (
+  <div
+    id="custom-error"
+    className={ testProp }
+  >
+    CustomErrorComponent
+  </div>
+);
 
 const customComponents = {
   LoadingComponent: CustomLoadingComponent,
@@ -108,3 +130,40 @@ test('Custom Components should overwrite Default Components with <RenderCtrlProv
   ).find('#custom-error').length;
   expect(customErrorComponentCount).toEqual(1);
 });
+
+test('Custom Components should receive custom props', () => {
+  let cn;
+  const customEmptyComponent = mount(
+    <RenderCtrlProvider { ...defaultComponents }>
+      <ComponentCustom
+        emptyComponentProps={ { testProp: 'hello' } }
+      />
+    </RenderCtrlProvider>
+  ).find('#custom-empty');
+  cn = customEmptyComponent.props().className;
+  expect(cn).toEqual('hello');
+
+  const customLoadingComponent = mount(
+    <RenderCtrlProvider { ...defaultComponents }>
+      <ComponentCustom
+        loadingComponentProps={ { testProp: 'world' } }
+        isLoading
+      />
+    </RenderCtrlProvider>
+  ).find('#custom-loading');
+  cn = customLoadingComponent.props().className;
+  expect(cn).toEqual('world');
+
+  const customErrorComponent = mount(
+    <RenderCtrlProvider { ...defaultComponents }>
+      <ComponentCustom
+        errorComponentProps={ { testProp: '!' } }
+        isLoading
+        isError
+      />
+    </RenderCtrlProvider>
+  ).find('#custom-error');
+  cn = customErrorComponent.props().className;
+  expect(cn).toEqual('!');
+});
+

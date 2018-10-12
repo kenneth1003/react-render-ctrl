@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-import { bool, func, any, element, oneOfType } from 'prop-types';
 import {
-  localDefaultLoadingId,
-  localDefaultEmptyId,
-  localDefaultErrorId
-} from '../constant';
+  bool,
+  func,
+  element,
+  oneOfType,
+  object
+} from 'prop-types';
+import defaultErrorComponent from '../defaultComponents/Error';
+import defaultLoadingComponent from '../defaultComponents/Loading';
+import defaultEmptyComponent from '../defaultComponents/Empty';
 
-const _LoadingComponent = () => {
-  return process.env.NODE_ENV !== 'production' ? <div id={ localDefaultLoadingId } /> : null;
-};
-const _EmptyComponent = () => {
-  return process.env.NODE_ENV !== 'production' ? <div id={ localDefaultEmptyId } /> : null;
-};
-const _ErrorComponent = () => {
-  return process.env.NODE_ENV !== 'production' ? <div id={ localDefaultErrorId } /> : null;
-};
 
 export default function withRenderCtrl(
   WrappedComponent,
@@ -23,8 +18,11 @@ export default function withRenderCtrl(
   class RenderCtrl extends Component {
     static propTypes = {
       isError: bool,
-      isDataReady: any,
+      isDataReady: bool,
       isLoading: bool,
+      errorComponentProps: object,
+      loadingComponentProps: object,
+      emptyComponentProps: object,
       debug: bool,
       shouldReloadEverytime: bool
     }
@@ -32,6 +30,9 @@ export default function withRenderCtrl(
       isError: false,
       isDataReady: false,
       isLoading: false,
+      errorComponentProps: {},
+      loadingComponentProps: {},
+      emptyComponentProps: {},
       debug: false,
       shouldReloadEverytime: false
     }
@@ -44,6 +45,9 @@ export default function withRenderCtrl(
         isError,
         isDataReady,
         isLoading,
+        errorComponentProps,
+        loadingComponentProps,
+        emptyComponentProps,
         debug,
         shouldReloadEverytime
       } = this.props;
@@ -51,36 +55,39 @@ export default function withRenderCtrl(
       const LoadingComponent =
         stateComponents.LoadingComponent ||
         this.context.LoadingComponent ||
-        _LoadingComponent;
+        defaultLoadingComponent;
 
       const EmptyComponent =
         stateComponents.EmptyComponent ||
         this.context.EmptyComponent ||
-        _EmptyComponent;
+        defaultEmptyComponent;
 
       const ErrorComponent =
         stateComponents.ErrorComponent ||
         this.context.ErrorComponent ||
-        _ErrorComponent;
+        defaultErrorComponent;
       if (process.env.NODE_ENV !== 'production' && debug) {
         /* eslint-disable no-console */
         console.group(WrappedComponent.name);
         console.log(`[props.isError]: ${isError}`);
         console.log(`[props.isDataReady]: ${isDataReady}`);
         console.log(`[props.isLoading]: ${isLoading}`);
+        console.log(`[props.errorComponentProps]: ${errorComponentProps}`);
+        console.log(`[props.loadingComponentProps]: ${loadingComponentProps}`);
+        console.log(`[props.emptyComponentProps]: ${emptyComponentProps}`);
         console.groupEnd(WrappedComponent.name);
         /* eslint-enable no-console */
       }
       // Render Logic
-      if (isError) return <ErrorComponent />;
+      if (isError) return <ErrorComponent { ...errorComponentProps } />;
       if (!shouldReloadEverytime) {
         if (isDataReady) return <WrappedComponent { ...this.props } />;
-        if (isLoading) return <LoadingComponent />;
-        return <EmptyComponent />;
+        if (isLoading) return <LoadingComponent { ...loadingComponentProps } />;
+        return <EmptyComponent { ...emptyComponentProps } />;
       }
-      if (isLoading) return <LoadingComponent />;
+      if (isLoading) return <LoadingComponent { ...loadingComponentProps } />;
       if (isDataReady) return <WrappedComponent { ...this.props } />;
-      return <EmptyComponent />;
+      return <EmptyComponent { ...emptyComponentProps } />;
     }
   }
   RenderCtrl.contextTypes = {
