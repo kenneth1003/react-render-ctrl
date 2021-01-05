@@ -9,7 +9,8 @@
     "code-checking": "jest && eslint src",
     "test:dev": "jest --watch",
     "build:npm": "rimraf dist && babel src --out-dir dist --ignore *.stories.js,*.spec.js",
-    "copy-files": "node scripts/copyfiles.js"
+    "copy-files": "node scripts/copyfiles.js",
+    "pre-publish": "yarn build:npm && yarn copy-files"
   },
   "jest": {
     "setupFiles": [
