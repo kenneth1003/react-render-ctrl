@@ -1,7 +1,7 @@
 ## React-Render-Ctrl
 [![npm version](https://img.shields.io/badge/npm-v1.1.1-brightgreen.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
 
-A component render control HOC for different states.
+A component render control HOC for different states with zero dependencies.
 
 ## Versions
 #### v1.x
