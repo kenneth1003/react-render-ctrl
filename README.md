@@ -319,18 +319,5 @@ StateComponent: {
 |`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` while `isLoading` is true even if data is ready|
 |`debug`|`bool`|`false`|log debug info in the console while `process.env.NODE_ENV !== 'production'`|
 
-## TODO
-#### development
-- Error payload support
-- React native support
-- Flow typing
-- higher test coverage
-- pre-build code-checking
-- CI/CD
-
-## Change Log
-#### v1.0.0-beta.0
-initial version
-
 ## License
 MIT
