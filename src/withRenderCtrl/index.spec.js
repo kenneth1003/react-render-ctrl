@@ -1,8 +1,6 @@
 import React from 'react';
 import withRenderCtrl from '.';
 import {
-  // localDefaultLoadingId,
-  // localDefaultEmptyId,
   localDefaultErrorId
 } from '../constant';
 
@@ -33,4 +31,14 @@ test('isError should render <ErrorComponent />', () => {
     />
   ).find('#' + localDefaultErrorId).length;
   expect(len2).toEqual(1);
+});
+
+test('Wrapped component should get their custom props', () => {
+  const wrapper = mount(
+    <TestingComponent
+      isDataReady
+      customProp="Hello"
+    />
+  );
+  expect(wrapper.props().customProp).toEqual('Hello');
 });

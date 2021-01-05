@@ -8,6 +8,7 @@ async function copyPackageJson() {
   const newPackageData = {
     ...packageData,
     main: "index.js",
+    types: "./index.d.ts"
   }
 
   const buildPath = path.resolve(__dirname, '../dist/package.json');
@@ -20,5 +21,10 @@ function copyReadme() {
   exec('cp README.md dist');
 }
 
+function copyTypes() {
+  exec('cp ./src/index.d.ts dist');
+}
+
 copyPackageJson();
 copyReadme();
+copyTypes();

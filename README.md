@@ -2,7 +2,20 @@
 [![npm version](https://img.shields.io/badge/npm-v1.1.1-brightgreen.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
 
 A component render control HOC for different states.
+
+## Versions
+#### v1.x
+initial version
+
+#### v2.x
+- update legacy Context API implement to the new Context API
+- add typescript typing file
 ## Table of Content
+- [React-Render-Ctrl](#react-render-ctrl)
+- [Versions](#versions)
+    - [v1.x](#v1x)
+    - [v2.x](#v2x)
+- [Table of Content](#table-of-content)
 - [Intention](#intention)
 - [Installation](#installation)
 - [Examples](#examples)
@@ -12,7 +25,9 @@ A component render control HOC for different states.
   - [Customized State Component](#customized-state-component)
 - [Render Flow](#render-flow)
 - [API](#api)
-- [Change Log](#change-log)
+      - [withRenderCtrl (WrappedComponent, [StateComponents])](#withrenderctrl-wrappedcomponent-statecomponents)
+      - [RenderCtrlProvider](#renderctrlprovider)
+      - [EnhancedComponent](#enhancedcomponent)
 - [License](#license)
 ## Intention
 In react development we often face a problem of dealing with different states for some data-driven components. In most cases, those states include:
