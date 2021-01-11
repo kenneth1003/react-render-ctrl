@@ -3,7 +3,7 @@
 
 A component render control HOC for different states with zero dependencies.
 
-# [Demo](https://codesandbox.io/s/react-render-ctrl-demo-0zomg?file=/src/styles.css)
+# [Demo](https://codesandbox.io/s/react-render-ctrl-demo-0zomg?file=/src/MinimalUseCase/index.js)
 
 ## Versions
 #### v1.x

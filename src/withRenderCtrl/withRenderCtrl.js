@@ -1,4 +1,4 @@
-import React, {useContext } from 'react';
+import React, { useContext } from 'react';
 import { RenderCtrlContext } from '../RenderCtrlProvider';
 import defaultErrorComponent from '../defaultComponents/Error';
 import defaultLoadingComponent from '../defaultComponents/Loading';
@@ -18,20 +18,9 @@ export default function withRenderCtrl(
     emptyComponentProps = {},
     debug = false,
     shouldReloadEverytime = false,
-    ...restProps,
+    ...propsToPass,
   }) {
     const context = useContext(RenderCtrlContext);
-    const propsToPass = {
-      isError,
-      isDataReady,
-      isLoading,
-      errorComponentProps,
-      loadingComponentProps,
-      emptyComponentProps,
-      debug,
-      shouldReloadEverytime,
-      ...restProps,
-    }
     // set status component
     const LoadingComponent =
       stateComponents.LoadingComponent ||
