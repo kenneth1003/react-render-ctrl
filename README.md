@@ -5,18 +5,7 @@ A component render control HOC for different states with zero dependencies.
 
 # [Demo](https://codesandbox.io/s/react-render-ctrl-demo-0zomg?file=/src/MinimalUseCase/index.js)
 
-## Versions
-#### v1.x
-initial version
-
-#### v2.x
-- update legacy Context API implement to the new Context API
-- add typescript typing file
 ## Table of Content
-- [Demo](#demo)
-  - [Versions](#versions)
-      - [v1.x](#v1x)
-      - [v2.x](#v2x)
   - [Table of Content](#table-of-content)
   - [Intention](#intention)
   - [Installation](#installation)
@@ -335,6 +324,14 @@ StateComponent: {
 |`emptyComponentProps`|`Object`|`{}`|props for customized empty component to show specific information|
 |`shouldReloadEverytime`|`bool`|`false`|always show `<LoadingComponent />` while `isLoading` is true even if data is ready|
 |`debug`|`bool`|`false`|log debug info in the console while `process.env.NODE_ENV !== 'production'`|
+
+## Versions
+#### v1.x
+initial version
+
+#### v2.x
+- update legacy Context API implement to the new Context API
+- add typescript typing file
 
 ## License
 MIT
