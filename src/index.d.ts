@@ -1,34 +1,40 @@
 import { ClassicComponent, FunctionComponent } from 'react'
 
-type ReactComponent<T> = ClassicComponent<T> | FunctionComponent<T>
+type ReactComponent<T = any> = ClassicComponent<T> | FunctionComponent<T>
 
 interface StateComponents {
-  ErrorComponent?: ReactComponent<any>,
-  EmptyComponent?: ReactComponent<any>,
-  LoadingComponent?: ReactComponent<any>,
+  ErrorComponent?: ReactComponent,
+  EmptyComponent?: ReactComponent,
+  LoadingComponent?: ReactComponent,
 }
 
-type RenderCtrlProvider = ClassicComponent<StateComponents>
+// Why not using `ClassicComponent`, because of this issue:
+// https://github.com/microsoft/TypeScript/issues/28631
+type RenderCtrlProvider = FunctionComponent<StateComponents>
 
 interface WithRenderCtrlProps {
   isError?: boolean,
     isDataReady?: boolean,
     isLoading?: boolean,
-    errorComponentProps?: ErrorProps,
-    loadingComponentProps?: LoadingProps,
-    emptyComponentProps?: EmptyProps,
+    errorComponentProps?: any,
+    loadingComponentProps?: any,
+    emptyComponentProps?: any,
     debug?: boolean,
     shouldReloadEverytime?: boolean,
 }
 
 interface withRenderCtrl {
-  (
+  <T>(
     WrappedComponent: T,
     stateComponents?: StateComponents
-  ): FunctionComponent<WithRenderCtrlProps & Parameters<T>[0]>
+  ): FunctionComponent<WithRenderCtrlProps & T extends (...args: infer A) => any ?  A[0] : T extends new(...args: infer A) => any ? A[0] : { noo: string }>
 }
 
-export {
-  RenderCtrlProvider,
-  withRenderCtrl
+export = ReactRenderCtrl;
+export as namespace ReactRenderCtrl;
+
+declare namespace ReactRenderCtrl {
+  export const withRenderCtrl: withRenderCtrl
+
+  export const RenderCtrlProvider: RenderCtrlProvider
 }
