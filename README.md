@@ -3,6 +3,8 @@
 
 A component render control HOC for different states with zero dependencies.
 
+# [Demo](https://codesandbox.io/s/react-render-ctrl-demo-0zomg?file=/src/MinimalUseCase/index.js)
+
 ## Versions
 #### v1.x
 initial version
@@ -11,24 +13,24 @@ initial version
 - update legacy Context API implement to the new Context API
 - add typescript typing file
 ## Table of Content
-- [React-Render-Ctrl](#react-render-ctrl)
-- [Versions](#versions)
-    - [v1.x](#v1x)
-    - [v2.x](#v2x)
-- [Table of Content](#table-of-content)
-- [Intention](#intention)
-- [Installation](#installation)
-- [Examples](#examples)
-  - [Basic Usage](#basic-usage)
-  - [With Redux](#with-redux)
-  - [Default State Component](#default-state-component)
-  - [Customized State Component](#customized-state-component)
-- [Render Flow](#render-flow)
-- [API](#api)
-      - [withRenderCtrl (WrappedComponent, [StateComponents])](#withrenderctrl-wrappedcomponent-statecomponents)
-      - [RenderCtrlProvider](#renderctrlprovider)
-      - [EnhancedComponent](#enhancedcomponent)
-- [License](#license)
+- [Demo](#demo)
+  - [Versions](#versions)
+      - [v1.x](#v1x)
+      - [v2.x](#v2x)
+  - [Table of Content](#table-of-content)
+  - [Intention](#intention)
+  - [Installation](#installation)
+  - [Examples](#examples)
+    - [Basic Usage](#basic-usage)
+    - [With Redux](#with-redux)
+    - [Default State Component](#default-state-component)
+    - [Customized State Component](#customized-state-component)
+  - [Render Flow](#render-flow)
+  - [API](#api)
+        - [withRenderCtrl (WrappedComponent, [StateComponents])](#withrenderctrl-wrappedcomponent-statecomponents)
+        - [RenderCtrlProvider](#renderctrlprovider)
+        - [EnhancedComponent](#enhancedcomponent)
+  - [License](#license)
 ## Intention
 In react development we often face a problem of dealing with different states for some data-driven components. In most cases, those states include:
 - **Ideal State**. The happy path for the component, everything is fine.

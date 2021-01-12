@@ -1,5 +1,4 @@
 import React from 'react';
-import { string } from 'prop-types';
 import { localDefaultLoadingId } from '../constant';
 
 const LoadingComponent = (props) => {
@@ -9,10 +8,6 @@ const LoadingComponent = (props) => {
       className={ props.testProp }
     />
     : null;
-};
-
-LoadingComponent.propTypes = {
-  testProp: string
 };
 
 export default LoadingComponent;
