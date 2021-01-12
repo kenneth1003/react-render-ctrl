@@ -1,5 +1,4 @@
 import React from 'react';
-import { string } from 'prop-types';
 import { localDefaultErrorId } from '../constant';
 
 const ErrorComponent = (props) => {
@@ -9,10 +8,6 @@ const ErrorComponent = (props) => {
       className={ props.testProp }
     />
     : null;
-};
-
-ErrorComponent.propTypes = {
-  testProp: string
 };
 
 export default ErrorComponent;

@@ -20,7 +20,6 @@ const defaultComponents = {
   ErrorComponent
 };
 
-/* eslint-disable react/prop-types */
 const CustomLoadingComponent = ({ testProp }) => (
   <div
     id="custom-loading"
