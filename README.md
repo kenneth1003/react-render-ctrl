@@ -1,5 +1,7 @@
 ## React-Render-Ctrl
-[![npm version](https://img.shields.io/badge/npm-v1.1.1-brightgreen.svg?style=flat-square)](https://www.npmjs.com/package/react-render-ctrl)
+[![npm](https://shields.io/npm/v/react-render-ctrl)](https://www.npmjs.com/package/react-render-ctrl)
+[![npm](https://img.shields.io/npm/dw/react-render-ctrl)](https://www.npmjs.com/package/react-render-ctrl)
+[![npm](https://shields.io/bundlephobia/minzip/react-render-ctrl)](https://bundlephobia.com/result?p=react-render-ctrl@2.1.0)
 
 A component render control HOC for different states with zero dependencies.
 
